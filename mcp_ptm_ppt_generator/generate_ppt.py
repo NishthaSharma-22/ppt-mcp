@@ -14,10 +14,6 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
 class Student(BaseModel):
-    Class: str = Field(..., description="Class")
-    Grade: str = Field(..., description="Student's grade")
-    Comments: str = Field(..., description="comments you might want to leave")
-    # 
     Tutor: str = Field(..., description="Tutor's name:")
     Student: str = Field(..., description="Student's name:")
     Subjects: str = Field(..., description="Student's subject:")
@@ -33,6 +29,13 @@ class Student(BaseModel):
     Data: str = Field(..., description="IXL Data & Probability Score")
     Overall: str = Field(..., description="Overall IXL Math Level")
     #  add the fields for the third slide here to talk about the rec skills from IXL
+    IXLAreaOfImprovement1: str = Field(..., description="Suggested IXL strand to work on:")
+    IXLAreaOfImprovement2: str = Field(..., description="IXL Suggested strand 2 to work on:")
+    AreaOfImprovement1SuggestedSkill1: str = Field(..., description="Skill 1 to work on to improve area of improvement 1")
+    AreaOfImprovement1SuggestedSkill2: str = Field(..., description="Skill 2 to work on to improve area of improvement 1")
+    AreaOfImprovement2SuggestedSkill1: str = Field(..., description="Skill 1 to work on to improve area of improvement 2")
+    AreaOfImprovement2SuggestedSkill2: str = Field(..., description="Skill 2 to work on to improve area of improvement 2")
+    # topics covered stuff
     Topic1: str = Field(..., description="Topic 1 covered this month")
     T1Status: str = Field(..., description="Status of the topic 1")
     Topic2: str = Field(..., description="Topic 2 covered this month")
