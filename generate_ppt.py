@@ -13,33 +13,88 @@ OUTPUT_FOLDER = os.path.join(SCRIPT_DIR, "generated_ppts")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
-class StudentData(BaseModel):
-    Name: str = Field(..., description="Student's name")
+class Student(BaseModel):
     Class: str = Field(..., description="Class")
-    Subjects: str = Field(..., description="Student's subject")
     Grade: str = Field(..., description="Student's grade")
     Comments: str = Field(..., description="comments you might want to leave")
+    # 
+    Tutor: str = Field(..., description="Tutor's name:")
+    Student: str = Field(..., description="Student's name:")
+    Subjects: str = Field(..., description="Student's subject:")
+    ParentRequirement: str = Field(..., description="Parent Requirement:")
+    ReportingPeriod: str = Field(..., description="Reoprting period:")
+    NoOfSessions: str = Field(..., description="No of sessions:")
+    Target: str = Field(..., description="IXL Target score")
+    Numbers: str = Field(..., description="IXL Numbers and Operations Score")
+    Algebra: str = Field(..., description="IXL Algebra and Algebraic Thinking Score")
+    Fractions: str = Field(..., description="IXL Fractions Score")
+    Geometry: str = Field(..., description="IXL Goemetry Score")
+    Measurement: str = Field(..., description="IXL Measurement Score")
+    Data: str = Field(..., description="IXL Data & Probability Score")
+    Overall: str = Field(..., description="Overall IXL Math Level")
+    #  add the fields for the third slide here to talk about the rec skills from IXL
+    Topic1: str = Field(..., description="Topic 1 covered this month")
+    T1Status: str = Field(..., description="Status of the topic 1")
+    Topic2: str = Field(..., description="Topic 2 covered this month")
+    T2Status: str = Field(..., description="Status of the topic 2")
+    MTest: str = Field(..., description="Monthly Test Score (out of 25)")
+    LGap: str = Field(..., description="Learning gap identified")
+    APlan: str = Field(..., description="Action Plan for the learning Gap")
+    StudentStepsNeeded: str = Field(..., description="Steps needed from student")
+    Task1: str = Field(..., description="Next task planned")
+    Task1Sess: str = Field(..., description="Number of sessions needed for task 1")
+    Task2: str = Field(..., description="Next task2 planned")
+    Task2Sess: str = Field(..., description="Number of sessions needed for task 2")
+    Notes: str = Field(..., description="Notes for upcoming tasks planned")
 
 
-def add_stuff_to_ppt(prs: Presentation, data: StudentData):
-    for slide in prs.slides:
-        for shape in slide.shapes:
-            if shape.has_text_frame:
-                for key, value in data.dict().items():
-                    if f"{{{{{key}}}}}" in shape.text:
+
+
+
+def replace_text(shape, data: dict):
+    if shape.has_text_frame:
+        for paragraph in shape.text_frame.paragraphs:
+            for run in paragraph.runs:
+                for key, value in data.items():
+                    placeholder = f"{{{{{key}}}}}"
+                    if placeholder in run.text:
                         if key == "Subjects":
                             value = ", ".join([s.strip() for s in value.split(",")])
-                        shape.text = shape.text.replace(f"{{{{{key}}}}}", str(value))
+                        run.text = run.text.replace(placeholder, str(value))
+    if shape.shape_type == 6:
+        for subshape in shape.shapes:
+            replace_text(subshape, data)
+    
+
+
+    if shape.shape_type == 19:
+        for row in shape.table.rows:
+            for cell in row.cells:
+                for paragraph in cell.text_frame.paragraphs:
+                    for run in paragraph.runs:
+                        for key, value in data.items():
+                            placeholder= f"{{{{{key}}}}}"
+                            if placeholder in run.text:
+                                if key == "Subjects":
+                                    value = ", ".join([s.strip() for s in value.split(",")])
+                                run.text = run.text.replace(placeholder, str(value))
+
+def add_stuff_to_ppt(prs: Presentation, data: Student):
+    d = data.dict()
+    for slide in prs.slides:
+        for shape in slide.shapes:
+            replace_text(shape, d)
+
 
 
 @mcp.tool
-def generate_ppt(student: StudentData):
+def generate_ppt(student: Student):
     """Genrate a ppt for your lovely students based on the template"""
     prs = Presentation(TEMPLATE_PATH)
     add_stuff_to_ppt(prs, student)
-    output_path = os.path.join(OUTPUT_FOLDER, f"{student.Name}.pptx")
+    output_path = os.path.join(OUTPUT_FOLDER, f"{student.Student}.pptx")
     prs.save(output_path)
-    return f"PPT generated for {student.Name} at {output_path}"
+    return f"PPT generated for {student.Student} at {output_path}"
 
 
 
