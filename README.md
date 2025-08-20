@@ -3,7 +3,7 @@
 An MCP tool to generate multiple PPTs for student Monthly PTMs without the trouble and pain of manually editing the same presentation multiple times :')
 
 ### why i built this
-
+---
 tl;dr: i hate making presentations
 
 As an online tutor, I am required to prepare Parent-Tutor Meeting presentations every month - one per student. These slides summarize each student's progress, their diagnostic and test scores, practice data and areas to improve.
@@ -32,7 +32,7 @@ With this,
 - a ready-to-use PPT is generated in seconds <3
 
 ### how it works
-
+---
 1. The tool reads <code>template.pptx</code> (the ppt template i am supposed to use)
 2. It scans for placeholders - written as <code>{{Placeholder_Name}}</code>
 3. We provide student data in any form to Claude - it organizes it as JSON
@@ -40,31 +40,36 @@ With this,
 5. A finished PPT is saved to <code>generated_ppts</code> folder
 
 ### setup and use
+---
 you'll need to use Claude desktop for running this mcp. turns out claude has great built in support for running mcps - the reason why i ended up using it.
+<br>
 1. clone the repo
-<code>
+```
 git clone https://github.com/NishthaSharma-22/ppt-mcp
-</code>
+```
 
 2. install dependencies
-<code>
+```
 pip install -r requirements.txt
 cd mcp_ptm_ppt_generator
-</code>
+```
 
 3. add mcp server to Claude desktop
 in the project terminal, type:
-<code>
+```
 fastmcp install claude-desktop mcp_ptm_ppt_generator.py --with python-pptx --with pydantic
-</code>
+```
 
 4. head over to Claude desktop, go to <code>Settings &lt; Developer</code>. you should be able to see the mcp loaded there.
 
-If claude shows errors while loading it, or something like 'server disconnected', which it likely will, close the application by going over to <code>file &lt; exit</code>
+
+> If claude shows errors while loading it, or something like 'server disconnected', which it likely will, close the application by going over to <code>file &lt; exit</code>
 reopen the doc, and this should be fixed.
 
-5. use inside claude!
-you can now run the tool! i like to simply type <code>generate_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a beautiful ppt within secs in <code>generated_ppts</code>
+
+5. use inside claude!<br>
+you can now run the tool!<br>
+i like to simply type <code>generate_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a beautiful ppt within secs in <code>generated_ppts</code>
 
 ### future ideas:
 - adding support for science ppt templates, since this is currently for math
