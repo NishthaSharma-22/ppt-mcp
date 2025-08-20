@@ -4,8 +4,9 @@ from fastmcp import FastMCP
 from pydantic import Field, BaseModel
 from pptx import Presentation
 import os
+from importlib import resources
 
-mcp = FastMCP("ptms made easier")
+mcp = FastMCP("Generate PPTs for MM PTMs easily")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(SCRIPT_DIR, "template.pptx")
@@ -14,12 +15,14 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
 class Student(BaseModel):
+    #  general details
     Tutor: str = Field(..., description="Tutor's name:")
     Student: str = Field(..., description="Student's name:")
     Subjects: str = Field(..., description="Student's subject:")
     ParentRequirement: str = Field(..., description="Parent Requirement:")
     ReportingPeriod: str = Field(..., description="Reoprting period:")
     NoOfSessions: str = Field(..., description="No of sessions:")
+    # IXL Diagnostic Stats
     Target: str = Field(..., description="IXL Target score")
     Numbers: str = Field(..., description="IXL Numbers and Operations Score")
     Algebra: str = Field(..., description="IXL Algebra and Algebraic Thinking Score")
@@ -35,15 +38,18 @@ class Student(BaseModel):
     AreaOfImprovement1SuggestedSkill2: str = Field(..., description="Skill 2 to work on to improve area of improvement 1")
     AreaOfImprovement2SuggestedSkill1: str = Field(..., description="Skill 1 to work on to improve area of improvement 2")
     AreaOfImprovement2SuggestedSkill2: str = Field(..., description="Skill 2 to work on to improve area of improvement 2")
-    # topics covered stuff
+    # topics taught that month
     Topic1: str = Field(..., description="Topic 1 covered this month")
     T1Status: str = Field(..., description="Status of the topic 1")
     Topic2: str = Field(..., description="Topic 2 covered this month")
     T2Status: str = Field(..., description="Status of the topic 2")
+    # monthly test details
     MTest: str = Field(..., description="Monthly Test Score (out of 25)")
+    # learning gaps and action plan
     LGap: str = Field(..., description="Learning gap identified")
     APlan: str = Field(..., description="Action Plan for the learning Gap")
     StudentStepsNeeded: str = Field(..., description="Steps needed from student")
+    # upcoming tasks
     Task1: str = Field(..., description="Next task planned")
     Task1Sess: str = Field(..., description="Number of sessions needed for task 1")
     Task2: str = Field(..., description="Next task2 planned")
@@ -92,7 +98,7 @@ def add_stuff_to_ppt(prs: Presentation, data: Student):
 
 @mcp.tool
 def generate_ppt(student: Student):
-    """Genrate a ppt for your lovely students based on the template"""
+    """Generate PPTs for MM PTMs easily"""
     prs = Presentation(TEMPLATE_PATH)
     add_stuff_to_ppt(prs, student)
     output_path = os.path.join(OUTPUT_FOLDER, f"{student.Student}.pptx")
