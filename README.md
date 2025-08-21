@@ -47,8 +47,7 @@ git clone https://github.com/NishthaSharma-22/ppt-mcp
 </code>
 
 2. install dependencies
-<code>
-pip install -r requirements.txt
+<code>pip install -r requirements.txt
 cd mcp_ptm_ppt_generator
 </code>
 
