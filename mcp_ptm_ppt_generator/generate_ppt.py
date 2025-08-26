@@ -23,16 +23,16 @@ class MathStudent(BaseModel):
     Subjects: str = Field(..., description="Student's subject:")
     ParentRequirement: str = Field(..., description="Parent Requirement:")
     ReportingPeriod: str = Field(..., description="Reoprting period:")
-    NoOfSessions: str = Field(..., description="No of sessions:")
+    NoOfSessions: int = Field(..., description="No of sessions:")
     # IXL Diagnostic Stats
-    Target: str = Field(..., description="IXL Target score")
-    Numbers: str = Field(..., description="IXL Numbers and Operations Score")
-    Algebra: str = Field(..., description="IXL Algebra and Algebraic Thinking Score")
-    Fractions: str = Field(..., description="IXL Fractions Score")
-    Geometry: str = Field(..., description="IXL Goemetry Score")
-    Measurement: str = Field(..., description="IXL Measurement Score")
-    Data: str = Field(..., description="IXL Data & Probability Score")
-    Overall: str = Field(..., description="Overall IXL Math Level")
+    Target: int = Field(..., description="IXL Target score")
+    Numbers: int = Field(..., description="IXL Numbers and Operations Score")
+    Algebra: int = Field(..., description="IXL Algebra and Algebraic Thinking Score")
+    Fractions: int = Field(..., description="IXL Fractions Score")
+    Geometry: int = Field(..., description="IXL Goemetry Score")
+    Measurement: int = Field(..., description="IXL Measurement Score")
+    Data: int = Field(..., description="IXL Data & Probability Score")
+    Overall: int = Field(..., description="Overall IXL Math Level")
     #  add the fields for the third slide here to talk about the rec skills from IXL
     IXLAreaOfImprovement1: str = Field(..., description="Suggested IXL strand to work on:")
     IXLAreaOfImprovement2: str = Field(..., description="IXL Suggested strand 2 to work on:")
@@ -46,7 +46,7 @@ class MathStudent(BaseModel):
     Topic2: str = Field(..., description="Topic 2 covered this month")
     T2Status: str = Field(..., description="Status of the topic 2")
     # monthly test details
-    MTest: str = Field(..., description="Monthly Test Score (out of 25)")
+    MTest: int = Field(..., description="Monthly Test Score (out of 25)")
     # learning gaps and action plan
     LGap: str = Field(..., description="Learning gap identified")
     APlan: str = Field(..., description="Action Plan for the learning Gap")
@@ -64,14 +64,14 @@ class ScienceStudent(BaseModel):
     Subjects: str = Field(..., description="Student's subject:")
     ParentRequirement: str = Field(..., description="Parent Requirement:")
     ReportingPeriod: str = Field(..., description="Reoprting period:")
-    NoOfSessions: str = Field(..., description="No of sessions:")
+    NoOfSessions: int = Field(..., description="No of sessions:")
     # topics taught that month
     Topic1: str = Field(..., description="Topic 1 covered this month")
     T1Status: str = Field(..., description="Status of the topic 1")
     Topic2: str = Field(..., description="Topic 2 covered this month")
     T2Status: str = Field(..., description="Status of the topic 2")
     # monthly test details
-    MTest: str = Field(..., description="Monthly Test Score (out of 25)")
+    MTest: int = Field(..., description="Monthly Test Score (out of 25)")
     # learning gaps and action plan
     LGap: str = Field(..., description="Learning gap identified")
     APlan: str = Field(..., description="Action Plan for the learning Gap")
