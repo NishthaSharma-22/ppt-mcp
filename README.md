@@ -69,7 +69,7 @@ reopen the doc, and this should be fixed.
 
 5. use inside claude!<br>
 you can now run the tool!<br>
-i like to simply type <code>generate_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a beautiful ppt within secs in <code>generated_ppts</code>
+i like to simply type <code>science_ppt</code> or <code>math_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a beautiful ppt within secs in <code>generated_ppts</code>
 
 ### future ideas:
 - adding support for science ppt templates, since this is currently for math
