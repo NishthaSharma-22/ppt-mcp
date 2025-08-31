@@ -42,7 +42,32 @@ With this,
 ### setup and use
 ---
 you'll need to use Claude desktop for running this mcp. turns out claude has great built in support for running mcps - the reason why i ended up using it.
+
+1. Run the command:
+```
+pip install mcp-ptm-ppt-generator
+```
+
+2. Go to claude desktop > settings > developer > edit config
+
+3. Paste the follwing code in the config file:
+```
+{
+  "mcpServers": {
+    "ppt-generator": {
+      "command": "mcp-ptm-ppt-generator",
+      "args": []
+    }
+  }
+}
+
+```
+4. you're good to go! you might want to exit claude and then come back to it to see the mcp loaded as a connector.
+
+
 <br>
+
+If you want to use it locally for some reason:
 1. clone the repo
 ```
 git clone https://github.com/NishthaSharma-22/ppt-mcp
@@ -69,10 +94,10 @@ reopen the doc, and this should be fixed.
 
 5. use inside claude!<br>
 you can now run the tool!<br>
-i like to simply type <code>science_ppt</code> or <code>math_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a beautiful ppt within secs in <code>generated_ppts</code>
+i like to simply type <code>science_ppt</code> or <code>math_ppt</code> and it prompts it to use the MCP to ask the required info. provide all the data - if something's missing it'll prompt you (great!) and you'll have a <i>beautiful</i> ppt within secs in <code>generated_ppts</code>
 
 ### future ideas:
-- adding support for science ppt templates, since this is currently for math
+- <del>adding support for science ppt templates, since this is currently for math</del>
 - export directly to pdfs
 
 
